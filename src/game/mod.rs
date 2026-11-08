@@ -25,13 +25,14 @@ struct EscapeToMain;
 enum GameState {
     #[default]
     Running,
+    Items,
 }
 
 pub(super) fn plugin(app: &mut App) {
     app.configure_sets(Update, GameplaySet.run_if(in_state(GameState::Running)))
         .add_sub_state::<GameState>()
         .add_input_context::<GameScene>()
-        .add_plugins((hud::plugin, witch::plugin, map::plugin))
+        .add_plugins((hud::plugin, witch::plugin))
         .add_systems(OnEnter(AppState::InGame), scene.spawn());
 }
 

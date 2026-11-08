@@ -1,15 +1,24 @@
 use bevy::prelude::*;
-use bevy_enhanced_input::prelude::*;
-
-pub(super) fn plugin(app: &mut App) {
-    app.add_input_context::<ForestMap>();
-}
+use bevy_ecs_tiled::prelude::*;
 
 #[derive(SceneComponent, Default, Clone, Debug)]
 pub(super) struct ForestMap;
 
 impl ForestMap {
     fn scene() -> impl Scene {
-        bsn! {}
+        bsn! {
+            TiledMap("forest-map.tmx")
+            TilemapAnchor::Center
+            TiledMapLayerZOffset(1.0)
+            TiledPhysicsSettings<TiledPhysicsAvianBackend> {
+                tiles_layer_filter: TiledFilter::Names(vec![
+                                        String::from("Water"),
+                                        String::from("RockSlopes_Auto")
+                ]),
+                objects_layer_filter: TiledFilter::Names(vec![
+                                        String::from("Props"),
+                ])
+            }
+        }
     }
 }
