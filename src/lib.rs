@@ -44,7 +44,6 @@ impl Plugin for FamiliarApp {
                 EnhancedInputPlugin,
                 TiledPlugin::default(),
                 PhysicsPlugins::default(),
-                PhysicsDebugPlugin::default(),
                 TiledPhysicsPlugin::<TiledPhysicsAvianBackend>::default(),
             ))
             .add_plugins((MainMenuPlugin, game::plugin))

@@ -5,11 +5,13 @@ use avian2d::{
 use bevy::{ecs::template::OptionTemplate, image::TextureAtlasTemplate, prelude::*};
 use bevy_enhanced_input::prelude::*;
 
+use crate::game::GameplaySet;
+
 const WITCH_SPEED: f32 = 200.0;
 
 pub(super) fn plugin(app: &mut App) {
     app.add_input_context::<Witch>()
-        .add_systems(Update, update_animation);
+        .add_systems(Update, update_animation.in_set(GameplaySet));
 }
 
 #[derive(SceneComponent, Default, Clone, Debug)]
